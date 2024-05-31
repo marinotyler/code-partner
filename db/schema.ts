@@ -5,6 +5,7 @@ import {
     primaryKey,
     integer,
     timestamp,
+    uuid,
   } from "drizzle-orm/pg-core"
 
 export const testing = pgTable("testing", {
@@ -15,6 +16,7 @@ export const testing = pgTable("testing", {
   import postgres from "postgres"
   import { drizzle } from "drizzle-orm/postgres-js"
   import type { AdapterAccount } from "next-auth/adapters"
+import { sql } from "drizzle-orm"
    
   const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle"
   const pool = postgres(connectionString, { max: 1 })
@@ -96,3 +98,17 @@ export const testing = pgTable("testing", {
       }),
     })
   )
+  export const room = pgTable("room", {
+    id: uuid('id').default(sql`gen_random_uuid()`)
+    .notNull()
+    .primaryKey(),
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    description: text("description").notNull(),
+    language: text("language").notNull(),
+    githubRepo: text("githubRepo")
+  })
+
+  export type Room = typeof room.$inferSelect
