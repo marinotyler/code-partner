@@ -13,14 +13,14 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { createRoomAction } from "./actions"
+import { createRoomAction } from "./actions"  
 import { useRouter } from "next/navigation"
  
 const formSchema = z.object({
     name: z.string().min(2).max(50),
     description: z.string().min(1). max(250),
     githubRepo: z.string().min(1).max(100),
-    language: z.string().min(1).max(50)
+    tags: z.string().min(1).max(250)
   })
 
   
@@ -32,7 +32,7 @@ export function CreateRoomForm() {
           name: "",
           description: "",
           githubRepo: "",
-          language: "",
+          tags: "",
         },
       })
 
@@ -67,7 +67,7 @@ export function CreateRoomForm() {
                 <FormItem>
                   <FormLabel>Describe the purpose for this room</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="JavaScript, Angular, etc..."/>
+                    <Input {...field} placeholder="Working on..."/>
                   </FormControl>
                   <FormDescription>
                     This is your room description.
@@ -78,12 +78,12 @@ export function CreateRoomForm() {
             />
             <FormField
               control={form.control}
-              name="language"
+              name="tags"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Tags</FormLabel>
                   <FormControl>
-                    <Input {...field} place/>
+                    <Input {...field} placeholder="JavaScript, Angular, etc..."/>
                   </FormControl>
                   <FormDescription>
                     List your programming langs, frameworks etc.
@@ -99,7 +99,7 @@ export function CreateRoomForm() {
                 <FormItem>
                   <FormLabel>Git Repo</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} placeholder="https://github.com/{reponame}"/>
                   </FormControl>
                   <FormDescription>
                     Include link to projects repository

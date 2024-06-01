@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import {db} from '@/db';
 import Link from 'next/link';
 import {
   Card,
@@ -11,6 +10,7 @@ import {
 } from "@/components/ui/card"
 import { Room } from '@/db/schema';
 import { getRooms } from '@/data-access/rooms';
+import TagsList, { splitTags } from '@/components/tagsList';
 
 function RoomCard({room}: {room: Room}){
   return(
@@ -19,7 +19,8 @@ function RoomCard({room}: {room: Room}){
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className='flex flex-col gap-4'>
+      <TagsList tags = {splitTags(room.tags)}></TagsList>
         {room.githubRepo &&
         <Link href={room.githubRepo} className='flex items-center gap-2'
             target='_blank' 
@@ -27,6 +28,7 @@ function RoomCard({room}: {room: Room}){
 
         >
         Github Repo</Link>}
+        
       </CardContent>
       <CardFooter>
         <Button asChild><Link href={`rooms/${room.id}`}>Join Room</Link></Button>

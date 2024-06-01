@@ -107,7 +107,7 @@ import { sql } from "drizzle-orm"
       .references(() => users.id, { onDelete: "cascade" }),
     name: text("name").notNull(),
     description: text("description").notNull(),
-    language: text("language").notNull(),
+    tags: text("tags").notNull(),
     githubRepo: text("githubRepo")
   })
 
