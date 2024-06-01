@@ -67,7 +67,7 @@ export function CreateRoomForm() {
                 <FormItem>
                   <FormLabel>Describe the purpose for this room</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} placeholder="JavaScript, Angular, etc..."/>
                   </FormControl>
                   <FormDescription>
                     This is your room description.
@@ -81,12 +81,12 @@ export function CreateRoomForm() {
               name="language"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Primary Language</FormLabel>
+                  <FormLabel>Tags</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} place/>
                   </FormControl>
                   <FormDescription>
-                    This is the language you are using in the room.
+                    List your programming langs, frameworks etc.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
