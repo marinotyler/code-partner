@@ -1,8 +1,8 @@
 import { getRoom } from "@/data-access/rooms";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge"
 import TagsList, { splitTags } from "@/components/tagsList";
 import { CodePartnerVideo } from "./video-player";
+
 
 export default async function RoomPage(props: {params: {roomId: string}}) {
     const roomId = props.params.roomId;
@@ -17,7 +17,7 @@ export default async function RoomPage(props: {params: {roomId: string}}) {
         <div className="grid grid-cols-3 min-h-screen">
             <div className="col-span-3 p-2">
                 <div className= "rounded-lg border bg-card text-card-foreground shadow-sm p-4">video player</div>
-                <CodePartnerVideo room = {room}></CodePartnerVideo>
+                <CodePartnerVideo room = {room}/>
             </div>
             <div className="col-span-1 p-2">
                 <div className= "rounded-lg border bg-card text-card-foreground shadow-sm p-4">

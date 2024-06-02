@@ -13,14 +13,10 @@ import {
   } from '@stream-io/video-react-sdk';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { generateTokenAction } from './actions';
   
-  const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;
-  const userId = 'user-id';
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmFkYzMxYjctMjZmOS00Mjg0LWE3YjAtODcxNGUifQ.Y4qzVQMQCPsTPxiO3QXjujGH7zKM0illkbdGl7fhhRM"
-  const user: User = { id: userId };
-  
-  export function CodePartnerVideo (room: Room) {
-    
+  const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;  
+  export function CodePartnerVideo ({room}: {room:  Room}) {
     const session = useSession();
     const [client,setClient]=useState<StreamVideoClient |null>(null);
     const [call, setCall]=useState<Call>();
@@ -36,7 +32,8 @@ import { useEffect, useState } from 'react';
             user: {
                 id: userId
             },
-            token });
+            tokenProvider: ()=> generateTokenAction(),
+           });
             setClient(client);
         const call = client.call('default', room.id);
         call.join({ create: true });
