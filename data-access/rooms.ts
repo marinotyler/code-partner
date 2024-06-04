@@ -36,12 +36,20 @@ export async function createRoom(
     const session = await getSession()
     if(!session){ throw new Error("Cannot authenticate user session")}
 
-    await db.insert(room).values({...roomData, userId: userId})
+    const inserted = await db.insert(room)
+    .values({...roomData, userId: userId})
+    .returning()
+    return inserted[0]
 }
 
 export async function editRoom(roomData:Room){
     const session = await getSession()
     if(!session){ throw new Error("Cannot authenticate user session")}
 
-    await db.update(room).set(roomData).where(eq(room.id, roomData.id))
+    const updated = await db.update(room)
+    .set(roomData)
+    .where(eq(room.id, roomData.id))
+    .returning()
+    return updated[0]
+
 }

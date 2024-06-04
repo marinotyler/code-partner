@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "./header";
 import { Providers } from "./provider"
 import NextTopLoader from "nextjs-toploader"
+import { Toaster } from "@/components/ui/toaster"
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -24,11 +25,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
+          <Toaster/>
           <NextTopLoader/>
             <Header />
-            {children}
+            <div className="container mx-auto">{children}</div>
+            
         </Providers>
-          </body>
+      </body>
     </html>
   );
 }

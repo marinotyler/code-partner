@@ -11,7 +11,8 @@ export async function createRoomAction(roomData: Omit<Room, "id" |'userId'>){
         throw new Error("Must be logged in to create a room")
     }
 
-    await createRoom(roomData, session.user.id )
+    const room = await createRoom(roomData, session.user.id )
 
     revalidatePath("/")
+    return room
 }

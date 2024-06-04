@@ -4,6 +4,8 @@ import { getRooms } from '@/data-access/rooms';
 import { SearchBar } from './search-bar';
 import { RoomCard } from './room-card';
 import { unstable_noStore } from 'next/cache';
+import Image from "next/image"
+
 
 
 export default async function Home({searchParams}: {
@@ -31,7 +33,17 @@ export default async function Home({searchParams}: {
           return <RoomCard key={room.id} room = {room}/>
         })}
       </div>
-
+        {rooms.length === 0 &&(
+          <div className='flex flex-col gap-4 justify-center items-center '>
+            <h1 className='text-3xl'>Just you and the void. No rooms available</h1>
+            <Image
+            className=""
+            src="/void.png"
+            width = "1000"
+            height = "1000"
+            alt="a picture of the void"></Image>
+          </div>
+        )}
     </main>
   );
 }
