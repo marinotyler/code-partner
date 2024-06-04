@@ -10,8 +10,9 @@ import {
 } from "@/components/ui/card"
 import { Room } from '@/db/schema';
 import { getRooms } from '@/data-access/rooms';
-import TagsList, { splitTags } from '@/components/tagsList';
+import TagsList from '@/components/tagsList';
 import { SearchBar } from './search-bar';
+import { splitTags } from '@/lib/utils';
 
 function RoomCard({room}: {room: Room}){
   return(
