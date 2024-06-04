@@ -1,11 +1,15 @@
 import { getRoom } from "@/data-access/rooms";
 import Link from "next/link";
-import TagsList, { splitTags } from "@/components/tagsList";
+import TagsList from "@/components/tagsList";
 import { CodePartnerVideo } from "./video-player";
+import { splitTags } from "@/lib/utils";
+import { unstable_noStore } from "next/cache";
 
 
 export default async function RoomPage(props: {params: {roomId: string}}) {
     const roomId = props.params.roomId;
+    unstable_noStore();
+
     const room= await getRoom(roomId);
 
     if(!room){
